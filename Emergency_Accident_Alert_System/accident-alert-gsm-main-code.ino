@@ -38,10 +38,10 @@ int magnitude = 0;
 int sensitivity = 50;
 double angle;
 boolean impact_detected = false;
-//Used to run impact routine every 2mS.
+
 unsigned long time1;
 unsigned long impact_time;
-unsigned long alert_delay = 10000; //10 seconds
+unsigned long alert_delay = 10000; 
 
 
 
@@ -73,16 +73,16 @@ void setup()
 
   sim800.println("AT");
   delay(1000);
-  //SendAT("AT", "OK", 2000); 
+  
   sim800.println("ATE1"); 
   delay(1000);
-  //SendAT("ATE1", "OK", 2000);
+ 
   sim800.println("AT+CPIN?");
   delay(1000);
-  //SendAT("AT+CPIN?", "READY", 2000);
+
   sim800.println("AT+CMGF=1"); 
   delay(1000);
-  //SendAT("AT+CMGF=1", "OK", 2000);
+ 
   sim800.println("AT+CNMI=1,1,0,0,0");
   delay(1000);
   
@@ -116,9 +116,9 @@ void loop()
     impact_time = millis();
     
     lcd.clear();
-    lcd.setCursor(0,0); //col=0 row=0
+    lcd.setCursor(0,0); 
     lcd.print("Crash Detected");
-    lcd.setCursor(0,1); //col=0 row=1
+    lcd.setCursor(0,1); 
     lcd.print("Magnitude:"+String(magnitude));
   }
 
@@ -161,9 +161,9 @@ void loop()
 void Impact()
 {
  
-  time1 = micros(); // resets time value
+  time1 = micros(); 
 
-  int oldx = xaxis; //store previous axis readings for comparison
+  int oldx = xaxis; 
   int oldy = yaxis;
   int oldz = zaxis;
 
@@ -173,9 +173,9 @@ void Impact()
   
 
   vibration--; 
-  //Serial.print("Vibration = "); Serial.println(vibration);
+  
   if(vibration < 0) vibration = 0;                                
-  //Serial.println("Vibration Reset!");
+ 
   
   if(vibration > 0) return;
   
@@ -189,7 +189,7 @@ void Impact()
   if (magnitude >= sensitivity) //impact detected
   {
     updateflag=1;
-    // reset anti-vibration counter
+  
     vibration = devibrate;
   }
 
@@ -309,9 +309,9 @@ void makeCall()
 {
   Serial.println("calling....");
   sim800.println("ATD"+EMERGENCY_PHONE+";");
-  delay(20000); //20 sec delay
+  delay(20000); 
   sim800.println("ATH");
-  delay(1000); //1 sec delay
+  delay(1000); 
 }
 
 
@@ -320,7 +320,7 @@ void makeCall()
 
  void sendSms(String text)
 {
-  //return;
+
   sim800.print("AT+CMGF=1\r");
   delay(1000);
   sim800.print("AT+CMGS=\""+EMERGENCY_PHONE+"\"\r");
@@ -336,9 +336,7 @@ void makeCall()
 
 
 
-/*****************************************************************************************
- * SendAT() function
- *****************************************************************************************/
+
 boolean SendAT(String at_command, String expected_answer, unsigned int timeout){
 
     uint8_t x=0;
@@ -346,7 +344,7 @@ boolean SendAT(String at_command, String expected_answer, unsigned int timeout){
     String response;
     unsigned long previous;
     
-    //Clean the input buffer
+
     while( sim800.available() > 0) sim800.read();
 
     sim800.println(at_command);
@@ -354,13 +352,12 @@ boolean SendAT(String at_command, String expected_answer, unsigned int timeout){
     x = 0;
     previous = millis();
 
-    //this loop waits for the answer with time out
     do{
-        //if there are data in the UART input buffer, reads it and checks for the asnwer
+
         if(sim800.available() != 0){
             response += sim800.read();
             x++;
-            // check if the desired answer (OK) is in the response of the module
+   
             if(response.indexOf(expected_answer) > 0){
                 answer = 1;
                 break;
