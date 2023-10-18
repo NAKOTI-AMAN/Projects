@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>ROCK,PAPER,SICSSOR GAME</TITLE>
+<SCRIPT type="text/javascript">
+
+
+function GAME()
+{
+var a=document.frm1.txt1.value;
+var arr=["ROCK","PAPER","SCISSOR"];
+var d=Math.floor(Math.random()*arr.length);
+var c=arr[d];
+alert("The computer chose : "+c+" and you chose : "+a);
+  if(a=="ROCK")
+  {
+  if(c=="PAPER")
+  {
+  alert("COMPUTER WINS");
+  }
+  else if(c=="ROCK")
+  {
+  alert("TIE");
+  }
+  else
+  {
+  alert("YOU WIN");
+  }
+  }
+  else if(a=="PAPER")
+  {
+  if(c=="ROCK")
+  {
+  alert("YOU WIN");
+  }
+  else if(c=="SCISSOR")
+  {
+  alert("COMPUTER WINS");
+  }
+  else
+  {
+  alert("TIE");
+  }
+  }
+  else
+  {
+  if(c=="ROCK")
+  {
+  alert("COMPUTER WINS");
+  }
+  else if(c=="PAPER")
+  {
+  alert("YOU WIN");
+  }
+  else
+  {
+  alert("TIE");
+  }
+  }
+  }</SCRIPT>
+</HEAD>
+<BODY background="C:\\Users\user\Desktop\coffee shop\microcontroller.jpg"> <H1 ALIGN=CENTER><B>WELCOME TO THE GAME<BR>CHOOSE ANYTHING BETWEEN: ROCK,PAPER,SCISSOR</B></H1>
+<FORM ALIGN=CENTER NAME="frm1">
+<INPUT TYPE="text" NAME="txt1" >
+<INPUT TYPE="button" VALUE="CLICK" OnClick="GAME()">
+</FORM>
+</BODY>
+</HTML>
